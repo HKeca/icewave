@@ -29,8 +29,8 @@ class Route
      * Setup a route
      * 
      * @param  string $uri     the route
-     * @param  array $methods http methods
-     * @param  string $action  array of actions to run
+     * @param  array $methods  http methods
+     * @param  string $action  the function definition
      */
     public function __construct($uri, $methods, $action) {
         $this->uri      = $uri;
