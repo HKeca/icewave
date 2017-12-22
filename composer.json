@@ -1,0 +1,20 @@
+{
+    "name": "hkeca/icewave",
+    "description": "A php route handler",
+    "type": "library",
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "Hunter Keca",
+            "email": "hunterkeca@gmail.com"
+        }
+    ],
+
+    "autoload": {
+        "psr-4": {
+            "icewave\\": "src/icewave/"
+        }
+    },
+
+    "require": {}
+}
