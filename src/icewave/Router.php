@@ -4,16 +4,10 @@ namespace icewave;
 
 use icewave\RouteCollection;
 use icewave\Route;
+use icewave\Middleware;
 
 class Router
 {
-    /**
-     * Collection of routes
-     * 
-     * @var array
-     */
-    private $collection;
-
     /**
      * Router
      */
@@ -101,7 +95,22 @@ class Router
             return;
         }
 
+        if ($this->collection->middleware !== NULL) {
+            foreach ($this->collection->middleware as $m) {
+                $m->run($route);
+            }
+        }
+
         $this->run($route->action);
+    }
+
+    /**
+     * @param Middleware $middleware
+     * @return void
+     */
+    public function middleware(Middleware $middleware) {
+        $this->collection->addMiddleware($middleware);
+        return;
     }
 
     /**

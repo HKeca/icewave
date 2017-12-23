@@ -3,6 +3,17 @@
 require_once "../vendor/autoload.php";
 
 use icewave\Router;
+use icewave\Middleware;
+
+class testMiddleware extends Middleware
+{
+    public function run() {
+        echo "Middleware: \n";
+        return;
+    }
+}
+
+$testMiddleware = new testMiddleware();
 
 $router = new Router();
 
@@ -11,14 +22,11 @@ function testFunc() {
     return;
 }
 
-function thisTest() {
-    echo "Heya";
-    return;
-}
-
 $router->get('/test', 'testFunc');
 
-$URI = $_SERVER['REQUEST_URI'];
-$METHOD = $_SERVER['REQUEST_METHOD'];
+$router->middleware($testMiddleware);
+
+$URI        = $_SERVER['REQUEST_URI'];
+$METHOD     = $_SERVER['REQUEST_METHOD'];
 
 $router->find($URI, $METHOD);

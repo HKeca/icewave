@@ -14,14 +14,22 @@ class RouteCollection
     public $routes;
 
     /**
+     * Middleware collection
+     * 
+     * @var array
+     */
+    public $middleware;
+
+    /**
      * RouteCollection
      */
     public function __construct() {
         $this->routes = array();
+        $this->middleware = array();
     }
 
     /**
-     * Add to the route array
+     * Add to the route the stack
      * 
      * @param Route $route the route to add
      */
@@ -37,6 +45,7 @@ class RouteCollection
      * Match the uri to the route
      * 
      * @param  string $uri the request uri
+     * @param  string $method the requested method
      * @return Route|boolean
      */
     public function match($uri, $method) {
@@ -61,5 +70,19 @@ class RouteCollection
             return true;
         else
             return false;
+    }
+
+    /**
+     * Add middleware to the stack
+     *
+     * @param Middleware $middleware the middleware
+     * @return void
+     */
+    public function addMiddleware(Middleware $middleware) {
+        if (in_array($middleware, $this->middleware) == false) {
+            array_push($this->middleware, $middleware);
+        }
+
+        return;
     }
 }

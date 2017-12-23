@@ -19,7 +19,7 @@ class Route
     public $methods;
 
     /**
-     * The actions to run when the route is requested.
+     * The action to run when the route is requested.
      * 
      * @var string
      */
